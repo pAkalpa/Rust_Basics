@@ -1,62 +1,89 @@
 fn main() {
     /*
-    Variables in Rust
-    */
+    Initializing multiple variables
+     */
 
-    let mut x: i64 = 15;
-    println!("The value of the variable x = {}", x);
-
-    x = 60;
-
-    let y: i32 = 5 * 5;
-
-    /*
-    Data Types
-           - Scalar Data Types
-               - integer
-                   - Signed = i8 i16 i32 i64
-                       2^(i - 1) -1 to 2^(i - 1)-1
-
-                   - Unsigned
-    */
-
-    println!("The maximum number in i8 is equal to {}", std::i8::MAX);
-    println!("The maximum number in u8 equals to {}", std::u8::MAX);
-
-    /*
-    Floats
-      - f32 f64
-    */
-
-    let z: f64 = 3.6;
-
-    println!("The maximum number in f32 is {}", std::f32::MAX);
-
-    /*
-    Boolean
-    */
-
-    let status: bool = false;
+    let (first_number, second_number) = (250, 480.32);
     println!(
-        "the values of the some of our variables are {:?}",
-        (x, y, z, status)
+        "The first number is {} and the second number is {}",
+        first_number, second_number
     );
 
-    let not_equals: bool = 18 != 18;
-    println!("The value of condition 18 != 18 is {}", not_equals);
-
     /*
-    Charaters
+    Readability of Large Number
     */
 
-    let c1: char = 'a';
-    let c2: char = '3';
-    let c3: char = '+';
-    let c4: char = '\u{288A}';
-    let c5: char = '\"';
+    let large_number = 1_000_000;
+    println!("The value of the large number is {}", large_number);
 
+    /*
+    Integer overflow
+    */
+
+    // let overflow_number: u8 = 256;
+
+    /*
+    Decimal numbers in other formats
+    */
+
+    let x: i32 = 255;
     println!(
-        "The values of defined chars are c1 = {}, c2 = {}, c3 = {}, c4 = {}, c5 = {}",
-        c1, c2, c3, c4, c5
+        "The value of variable x in hexadecimal is {:o} and octal is {:X} and in binary {:b}",
+        x, x, x
     );
+
+    /*
+    Snake case convention
+    */
+
+    let Number = 45;
+
+    /*
+    Opertaion on number in different formats
+    */
+
+    let n1: i32 = 14;
+    let n2: f64 = 15.6;
+    // let n3 = n1 + n2 as i32;
+    let n3 = n1 as f64 + n2;
+
+    println!("{}", n3);
+
+    /*
+    Shadowing
+    */
+
+    // let s = 5;
+    // let s = 5 * 5;
+    // println!("The value of the variable s = {}", s);
+
+    let mut s = 5;
+    let s = 5 * 5;
+    println!("The value of the variable s = {}", s);
+
+    let s = 32;
+    println!("The value of variable s = {} is currently a integer", s);
+
+    let s = 'A';
+    println!("The variable s = {} is currently a char", s);
+
+    let s = 64.5;
+    println!("The variable s = {} is currently a float", s);
+
+    let num = 65;
+    {
+        let num = 60;
+        println!(
+            "The value of the variable s inside the inner scope is {}",
+            num
+        );
+    }
+    println!("The value of the variable s = {}", num);
+
+    /*
+    Constants
+    */
+
+    const MAX_SALARY: u32 = 100_000;
+    println!("The value of the constant is {}", MAX_SALARY);
 }
