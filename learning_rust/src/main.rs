@@ -1,86 +1,68 @@
+use std::mem::size_of_val;
+
 fn main() {
     /*
-    Strings
-       - String slices (&str) - Fixed length strings
+    Tuples
+        - destructuring tuple
+        - nested tuples
     */
 
-    let some_string = "Fixed Length String";
-    println!("The text inside the string is \"{}\"", some_string);
+    let my_information = ("Pasindu Akalpa", 25);
+    println!(
+        "Name is {} and age is {}",
+        my_information.0, my_information.1
+    );
+
+    let (name, age) = my_information;
+    println!("{} -> {}", name, age);
+
+    let nested_tuple = (4, 5.0, (3, 2), "Hello");
+    let element = nested_tuple.2 .0;
+    println!("The value of element is {}", element);
+
+    let empty_tuple = ();
 
     /*
-    Strings
-       - variable length strings
-       - adding removing characters
-       - operations on strings
-       - formatting and concatanating strings
+    Arrays
+        - update elements
+        - string and char arrays
+        - functions on array
     */
 
-    let mut growable_string = String::from("This string will grow");
-    println!("The text inside the string is \"{}\"", growable_string);
+    let mut number_array: [i32; 5] = [4, 5, 6, 7, 8];
+    println!("{}", number_array[0]);
 
-    growable_string.push('s');
-    println!("Hey the text inside the string is \"{}\"", growable_string);
+    println!("{:?}", number_array);
 
-    growable_string.pop();
-    println!("Hey the text inside the string is \"{}\"", growable_string);
+    number_array[4] = 5;
+    println!("{:?}", number_array);
 
-    growable_string.push_str(" which i will use");
-    println!("Hey the text inside the string is \"{}\"", growable_string);
+    let array_with_same_elements = [0; 10];
 
-    println!(
-        "I am going to tell you some basic things about the strings, 
-    Is the string empty {},
-    The length of the string is {},
-    The string has {} bytes,
-    Does the string contains the word 'use' {}",
-        growable_string.is_empty(),
-        growable_string.len(),
-        growable_string.capacity(),
-        growable_string.contains("use")
-    );
+    let mut string_array_1 = ["Apple", "Tomato", "Grapes"];
+    let string_array_2 = ["Unknown"; 6];
 
-    growable_string.push_str("   ");
-    println!(
-        "the length of the string before the trim is {},
-    length of the string after the trim is {}",
-        growable_string.len(),
-        growable_string.trim().len()
-    );
+    string_array_1[0] = "Carrot";
 
-    let number = 6;
-    println!(
-        "The value of the number in string is {}",
-        number.to_string()
-    );
+    let char_array = ['a', 'p', 'p', 'l', 'e'];
+
+    let mut number_array_1: [i32; 5] = [4, 5, 6, 7, 8];
+    let subset_array = &number_array_1[0..=3];
 
     println!(
-        "Is the number really a string {}",
-        number.to_string() == "6"
+        "The subset of the values of the array are {:?}",
+        subset_array
     );
 
-    let some_char = 'a';
-    println!("The character in string is {}", some_char.to_string());
+    println!("Elements in the array are {}", number_array_1.len());
 
     println!(
-        "Is the character really a string {}",
-        some_char.to_string() == "a"
+        "The array is occupying {} bytes",
+        size_of_val(&number_array_1)
     );
 
-    let my_name = "Pasindu Akalpa".to_string();
-    println!("The string contains my name {}", my_name);
+    // number_array_1[10] = 5;
 
-    let empty_string = String::new();
-    println!("Length is {}", empty_string.len());
-
-    let s_1 = "Pasindu".to_string();
-    let s_2 = "Akalpa".to_string();
-
-    let s_3 = format!("My first name is {} and my last name is {}", s_1, s_2);
-    println!("{}", s_3);
-
-    let string_1 = String::from("Pasindu");
-    let string_2 = String::from("Akalpa");
-
-    let string_3 = format!("{}{}", string_1, string_2);
-    println!("The concatenated string is {}", string_3);
+    let check_index = number_array_1.get(2);
+    println!("{:?}", check_index);
 }
