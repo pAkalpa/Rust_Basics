@@ -1,68 +1,43 @@
-use std::mem::size_of_val;
-
 fn main() {
     /*
-    Tuples
-        - destructuring tuple
-        - nested tuples
+    Vectors
+        - declare vector
+        - slice vector
     */
 
-    let my_information = ("Pasindu Akalpa", 25);
-    println!(
-        "Name is {} and age is {}",
-        my_information.0, my_information.1
-    );
+    let mut number_vec: Vec<i32> = vec![5, 6, 7, 8, 9, 10, 11, 12, 13];
+    println!("{}", number_vec[0]);
 
-    let (name, age) = my_information;
-    println!("{} -> {}", name, age);
+    number_vec[4] = 5;
+    println!("{:?}", number_vec);
 
-    let nested_tuple = (4, 5.0, (3, 2), "Hello");
-    let element = nested_tuple.2 .0;
-    println!("The value of element is {}", element);
+    let array_with_same_elements: Vec<i32> = vec![0; 10];
+    println!("{:?}", array_with_same_elements);
 
-    let empty_tuple = ();
+    let mut string_array_1: Vec<&str> = vec!["apple", "tomato", "grapes"];
+    string_array_1[0] = "Pasindu Akalpa";
 
-    /*
-    Arrays
-        - update elements
-        - string and char arrays
-        - functions on array
-    */
+    let string_array_2: Vec<&str> = vec!["Unknown"; 6];
 
-    let mut number_array: [i32; 5] = [4, 5, 6, 7, 8];
-    println!("{}", number_array[0]);
+    let char_vec: Vec<char> = vec!['a', 'p', 'p', 'l', 'e'];
 
-    println!("{:?}", number_array);
+    let subset_vec = &number_vec[0..3];
+    println!("The subset of the values of the array are {:?}", subset_vec);
 
-    number_array[4] = 5;
-    println!("{:?}", number_array);
+    println!("Elements in the array are {}", number_vec.len());
 
-    let array_with_same_elements = [0; 10];
-
-    let mut string_array_1 = ["Apple", "Tomato", "Grapes"];
-    let string_array_2 = ["Unknown"; 6];
-
-    string_array_1[0] = "Carrot";
-
-    let char_array = ['a', 'p', 'p', 'l', 'e'];
-
-    let mut number_array_1: [i32; 5] = [4, 5, 6, 7, 8];
-    let subset_array = &number_array_1[0..=3];
-
-    println!(
-        "The subset of the values of the array are {:?}",
-        subset_array
-    );
-
-    println!("Elements in the array are {}", number_array_1.len());
-
-    println!(
-        "The array is occupying {} bytes",
-        size_of_val(&number_array_1)
-    );
-
-    // number_array_1[10] = 5;
-
-    let check_index = number_array_1.get(2);
+    let check_index = number_vec.get(2);
     println!("{:?}", check_index);
+
+    number_vec.push(30);
+    number_vec.push(40);
+    println!("{:?}", number_vec);
+
+    number_vec.remove(5);
+    println!("{:?}", number_vec);
+
+    println!(
+        "The value of 10 exist in the array {}",
+        number_vec.contains(&10)
+    )
 }
