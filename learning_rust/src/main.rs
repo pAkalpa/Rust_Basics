@@ -1,43 +1,64 @@
+use std::io::stdin;
+
 fn main() {
     /*
-    Vectors
-        - declare vector
-        - slice vector
+    Functions
+        - basic function (no inputs and outputs)
+        - functions with parameters
+        - functions with return type
+        - functions with multiple return
     */
 
-    let mut number_vec: Vec<i32> = vec![5, 6, 7, 8, 9, 10, 11, 12, 13];
-    println!("{}", number_vec[0]);
+    basic_fn();
+    function_with_inputs("Pasindu Akalpa", 25);
 
-    number_vec[4] = 5;
-    println!("{:?}", number_vec);
+    let name = "Nevon";
+    let age = 9;
 
-    let array_with_same_elements: Vec<i32> = vec![0; 10];
-    println!("{:?}", array_with_same_elements);
-
-    let mut string_array_1: Vec<&str> = vec!["apple", "tomato", "grapes"];
-    string_array_1[0] = "Pasindu Akalpa";
-
-    let string_array_2: Vec<&str> = vec!["Unknown"; 6];
-
-    let char_vec: Vec<char> = vec!['a', 'p', 'p', 'l', 'e'];
-
-    let subset_vec = &number_vec[0..3];
-    println!("The subset of the values of the array are {:?}", subset_vec);
-
-    println!("Elements in the array are {}", number_vec.len());
-
-    let check_index = number_vec.get(2);
-    println!("{:?}", check_index);
-
-    number_vec.push(30);
-    number_vec.push(40);
-    println!("{:?}", number_vec);
-
-    number_vec.remove(5);
-    println!("{:?}", number_vec);
+    function_with_inputs(name, age);
 
     println!(
-        "The value of 10 exist in the array {}",
-        number_vec.contains(&10)
-    )
+        "Value of the functions_with_return(4, 5) = {}",
+        function_with_return(4, 5)
+    );
+
+    let (mul, add, sub) = function_with_multiple_return(3, 4);
+    println!(
+        "Multiplication = {}, Addition = {}, Substraction = {}",
+        mul, add, sub
+    );
+
+    let full_name = {
+        let first_name = "Pasindu";
+        let last_name = "Akalpa";
+        format!("{} {}", first_name, last_name)
+    };
+
+    println!("My full name is {}", full_name);
+
+    /*
+    Inputs from user
+    */
+
+    let mut n = String::new();
+    stdin().read_line(&mut n).expect("failed to read input.");
+
+    let n: f64 = n.trim().parse().expect("Invalid input");
+    println!("{:?}", n);
+}
+
+fn basic_fn() {
+    println!("This is a basic function");
+}
+
+fn function_with_inputs(name: &str, age: i32) {
+    println!("The name is {} and age is {}", name, age);
+}
+
+fn function_with_return(num1: i32, num2: i32) -> i32 {
+    num1 * num2
+}
+
+fn function_with_multiple_return(num1: i32, num2: i32) -> (i32, i32, i32) {
+    (num1 * num2, num1 + num2, num1 - num2)
 }
