@@ -1,64 +1,42 @@
-use std::io::stdin;
-
 fn main() {
     /*
-    Functions
-        - basic function (no inputs and outputs)
-        - functions with parameters
-        - functions with return type
-        - functions with multiple return
+    Rust Ownership
+        - each value in rust has a variable that's called its owner.
+        - There can be only one owner at a time.
+        - when the owner goes out of scope, the value will be dropped.
     */
 
-    basic_fn();
-    function_with_inputs("Pasindu Akalpa", 25);
-
-    let name = "Nevon";
-    let age = 9;
-
-    function_with_inputs(name, age);
-
-    println!(
-        "Value of the functions_with_return(4, 5) = {}",
-        function_with_return(4, 5)
-    );
-
-    let (mul, add, sub) = function_with_multiple_return(3, 4);
-    println!(
-        "Multiplication = {}, Addition = {}, Substraction = {}",
-        mul, add, sub
-    );
-
-    let full_name = {
-        let first_name = "Pasindu";
-        let last_name = "Akalpa";
-        format!("{} {}", first_name, last_name)
-    };
-
-    println!("My full name is {}", full_name);
+    // copy and move
+    // primitives and non-primitives
+    // move = leads to change of ownership
+    // reference = leads to concept of borrowing
 
     /*
-    Inputs from user
-    */
+    let mut x = 32;
+    let mut y = x;
+    println!("The value of x = {} and the value of y = {}", x, y);
 
-    let mut n = String::new();
-    stdin().read_line(&mut n).expect("failed to read input.");
+    let s1 = String::from("abc");
+    let s2 = &s1; // borrowing and referencing
+    println!("The value of s1 = {} and the value of s2 = {}", s1, s2);
+     */
 
-    let n: f64 = n.trim().parse().expect("Invalid input");
-    println!("{:?}", n);
-}
+    let num_vec1: Vec<i32> = vec![5, 6, 7, 8, 9];
+    let num_vec2 = &num_vec1;
+    println!(
+        "The first vector is {:?} and second vector is {:?}",
+        num_vec1, num_vec2
+    );
 
-fn basic_fn() {
-    println!("This is a basic function");
-}
+    let num_vec2 = num_vec1.clone();
+    println!(
+        "The first vector is {:?} and second vector is {:?}",
+        num_vec1, num_vec2
+    );
 
-fn function_with_inputs(name: &str, age: i32) {
-    println!("The name is {} and age is {}", name, age);
-}
+    {
+        let my_name = String::from("pasindu Akalpa");
+    }
 
-fn function_with_return(num1: i32, num2: i32) -> i32 {
-    num1 * num2
-}
-
-fn function_with_multiple_return(num1: i32, num2: i32) -> (i32, i32, i32) {
-    (num1 * num2, num1 + num2, num1 - num2)
+    // println!("My name is {}", my_name);
 }
