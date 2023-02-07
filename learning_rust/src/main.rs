@@ -1,42 +1,28 @@
 fn main() {
     /*
-    Rust Ownership
-        - each value in rust has a variable that's called its owner.
-        - There can be only one owner at a time.
-        - when the owner goes out of scope, the value will be dropped.
+    Ownership and functions
     */
 
-    // copy and move
-    // primitives and non-primitives
-    // move = leads to change of ownership
-    // reference = leads to concept of borrowing
-
-    /*
-    let mut x = 32;
-    let mut y = x;
-    println!("The value of x = {} and the value of y = {}", x, y);
-
-    let s1 = String::from("abc");
-    let s2 = &s1; // borrowing and referencing
-    println!("The value of s1 = {} and the value of s2 = {}", s1, s2);
-     */
-
-    let num_vec1: Vec<i32> = vec![5, 6, 7, 8, 9];
-    let num_vec2 = &num_vec1;
+    let stack_num = 32;
+    let mut heap_num = vec![4, 5, 6];
+    stack_function(stack_num);
     println!(
-        "The first vector is {:?} and second vector is {:?}",
-        num_vec1, num_vec2
+        "The stack variable is copied and the original value was {}",
+        stack_num
     );
+    heap_function(&mut heap_num);
+    println!("The value of the vector inside function is {:?}", heap_num);
+}
 
-    let num_vec2 = num_vec1.clone();
+fn stack_function(mut var: i32) {
+    var = 56;
     println!(
-        "The first vector is {:?} and second vector is {:?}",
-        num_vec1, num_vec2
+        "The copied value of the variable has been updated to {}",
+        var
     );
+}
 
-    {
-        let my_name = String::from("pasindu Akalpa");
-    }
-
-    // println!("My name is {}", my_name);
+fn heap_function(var: &mut Vec<i32>) {
+    var.push(7);
+    println!("The value of the vector inside function is {:?}", var);
 }
