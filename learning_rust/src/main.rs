@@ -1,28 +1,50 @@
 fn main() {
     /*
-    Ownership and functions
+    References Rules
+        - One mutable reference in a scope
+        - Many immutable references
+        - mutable and immutable cannot coexist
+        - scope of a reference
+        - data should not change when immutable references are in scope
     */
 
-    let stack_num = 32;
+    // let mut heap_num = vec![4, 5, 6];
+    // let ref1 = &mut heap_num;
+    // let ref2 = &mut heap_num;
+    // println!(
+    //     "The First reference is {:?} and second reference is {:?}",
+    //     ref1, ref2
+    // );
+
+    // let mut heap_num = vec![4, 5, 6];
+    // let ref1 = &heap_num;
+    // let ref2 = &heap_num;
+    // println!(
+    //     "The First reference is {:?} and second reference is {:?}",
+    //     ref1, ref2
+    // );
+
+    // let mut heap_num = vec![4, 5, 6];
+    // let ref1 = &heap_num;
+    // let ref2 = &heap_num;
+    // let ref3 = &mut heap_num;
+    // println!(
+    //     "The First reference is {:?} and second reference is {:?} and third reference is {:?}",
+    //     ref1, ref2, ref3
+    // );
+
+    // let mut heap_num = vec![4, 5, 6];
+    // let ref1 = &heap_num;
+    // let ref2 = &heap_num;
+    // println!("Immutable references are {:?} and {:?}", ref1, ref2);
+
+    // let ref3 = &mut heap_num;
+    // ref3.push(7);
+    // println!("The First reference is {:?}", ref3);
+
     let mut heap_num = vec![4, 5, 6];
-    stack_function(stack_num);
-    println!(
-        "The stack variable is copied and the original value was {}",
-        stack_num
-    );
-    heap_function(&mut heap_num);
-    println!("The value of the vector inside function is {:?}", heap_num);
-}
-
-fn stack_function(mut var: i32) {
-    var = 56;
-    println!(
-        "The copied value of the variable has been updated to {}",
-        var
-    );
-}
-
-fn heap_function(var: &mut Vec<i32>) {
-    var.push(7);
-    println!("The value of the vector inside function is {:?}", var);
+    let ref1 = &heap_num;
+    let ref2 = &heap_num;
+    println!("Immutable references are {:?} and {:?}", ref1, ref2);
+    heap_num.push(86);
 }
