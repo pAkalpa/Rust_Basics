@@ -1,24 +1,26 @@
 fn main() {
     /*
-    String concatenation and ownership
+    Conditional IF
+        - If with multiple conditions
     */
 
-    // let s1 = String::from("Hello");
-    // let s2: &str = " world";
+    // let some_number = 40;
+    // if some_number < 50 {
+    //     println!("The number is less than 50")
+    // }
 
-    // let s3 = s1 + s2;
-    // println!("{}", s3);
+    // println!()
 
-    // let s1 = String::from("Hello");
-    // let s2 = String::from(" World!");
+    let mark = 65;
 
-    // let s3 = s1 + &s2;
-    // println!("{} {}", s3, s2);
+    if mark >= 60 && mark <= 70 {
+        println!("The grade is satisfactory");
+    }
 
-    let s1 = String::from("Hello");
-    let s2 = String::from("World");
-    let s3 = String::from("From Rust");
+    let flag_1 = true;
 
-    let s4 = s1 + &s2 + &s3;
-    println!("{} {} {}", s4, s2, s3);
+    if flag_1 != false {
+        println!("This will execute when flag_1 = true and when flag_1 is not false");
+    } else {
+    }
 }
