@@ -1,43 +1,59 @@
+use std::io::stdin;
+
 fn main() {
     /*
-    Match
-        - Simple match
-        - if let syntax style match
+    Loops
+        - loops with no condition
+        - while loop
     */
 
-    // let some_number = 100;
-    // match some_number {
-    //     1 => println!("The number is 1"),
-    //     2 | 3 => println!("The number is either 2 or 3"),
-    //     4..=100 => println!("The number is between 4 and 100 inclusive"),
-    //     _ => println!("The number is greater than 100"),
+    // loop {
+    //     println!("This is an infinite loop");
     // }
 
-    // let marks = 50;
+    // let my_number = 5;
 
-    // let mut grade = 'N';
+    // let mut guess = false;
 
-    // match marks {
-    //     90..=100 => grade = 'A',
-    //     80..=89 => grade = 'B',
-    //     70..=79 => grade = 'C',
-    //     60..=69 => grade = 'D',
-    //     _ => grade = 'F',
+    // println!("guess my number which between 1 and 20");
+
+    // while !guess {
+    //     let mut input = String::new();
+    //     stdin().read_line(&mut input).expect("failed to read input");
+
+    //     let number: u8 = input.trim().parse().expect("Invalid Input");
+
+    //     if my_number == number {
+    //         println!("You guessed the number correctly");
+    //         guess = true;
+    //     } else {
+    //         println!("Please try again!");
+    //     }
     // }
 
-    // println!("The grade achieved is {}", grade)
+    println!(
+        "Enter a number and i will tell you the next
+    number after your number which is divisible by both 2 and 5"
+    );
 
-    let marks = 50;
+    let mut number = String::new();
+    stdin()
+        .read_line(&mut number)
+        .expect("failed to read input");
+    let mut number: u8 = number.trim().parse().expect("Invalid Input");
 
-    let mut grade = 'N';
+    let mut divisible_by_2_5 = false;
 
-    let grade = match marks {
-        90..=100 => 'A',
-        80..=89 => 'B',
-        70..=79 => 'C',
-        60..=69 => 'D',
-        _ => 'F',
-    };
+    while !divisible_by_2_5 {
+        number += 1;
 
-    println!("The grade achieved is {}", grade)
+        if number % 2 == 0 && number % 5 == 0 {
+            println!(
+                "The number after your number which is divisible by both 2
+            and 5 is {}",
+                number
+            );
+            divisible_by_2_5 = true;
+        }
+    }
 }
