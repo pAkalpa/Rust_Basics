@@ -1,29 +1,43 @@
-use std::io::stdin;
 fn main() {
     /*
-    - Condition if
-    - Nested if
+    Match
+        - Simple match
+        - if let syntax style match
     */
 
-    println!("Enter a number");
-    let mut some_num = String::new();
+    // let some_number = 100;
+    // match some_number {
+    //     1 => println!("The number is 1"),
+    //     2 | 3 => println!("The number is either 2 or 3"),
+    //     4..=100 => println!("The number is between 4 and 100 inclusive"),
+    //     _ => println!("The number is greater than 100"),
+    // }
 
-    stdin()
-        .read_line(&mut some_num)
-        .expect("failed to read input");
+    // let marks = 50;
 
-    let some_num: i32 = some_num.trim().parse().expect("invalid input");
+    // let mut grade = 'N';
 
-    if some_num != 0 {
-        if some_num % 2 == 0 {
-            println!("The number is even");
-        } else {
-            println!("The number is odd");
-        }
-    } else {
-        println!("The number is 0 and is neither even or odd");
-    }
+    // match marks {
+    //     90..=100 => grade = 'A',
+    //     80..=89 => grade = 'B',
+    //     70..=79 => grade = 'C',
+    //     60..=69 => grade = 'D',
+    //     _ => grade = 'F',
+    // }
 
-    let value = if true { 1 } else { 2 };
-    println!("value = {} ", value);
+    // println!("The grade achieved is {}", grade)
+
+    let marks = 50;
+
+    let mut grade = 'N';
+
+    let grade = match marks {
+        90..=100 => 'A',
+        80..=89 => 'B',
+        70..=79 => 'C',
+        60..=69 => 'D',
+        _ => 'F',
+    };
+
+    println!("The grade achieved is {}", grade)
 }
