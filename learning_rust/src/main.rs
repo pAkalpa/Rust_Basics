@@ -1,26 +1,29 @@
+use std::io::stdin;
 fn main() {
     /*
-    Conditional IF
-        - If with multiple conditions
+    - Condition if
+    - Nested if
     */
 
-    // let some_number = 40;
-    // if some_number < 50 {
-    //     println!("The number is less than 50")
-    // }
+    println!("Enter a number");
+    let mut some_num = String::new();
 
-    // println!()
+    stdin()
+        .read_line(&mut some_num)
+        .expect("failed to read input");
 
-    let mark = 65;
+    let some_num: i32 = some_num.trim().parse().expect("invalid input");
 
-    if mark >= 60 && mark <= 70 {
-        println!("The grade is satisfactory");
-    }
-
-    let flag_1 = true;
-
-    if flag_1 != false {
-        println!("This will execute when flag_1 = true and when flag_1 is not false");
+    if some_num != 0 {
+        if some_num % 2 == 0 {
+            println!("The number is even");
+        } else {
+            println!("The number is odd");
+        }
     } else {
+        println!("The number is 0 and is neither even or odd");
     }
+
+    let value = if true { 1 } else { 2 };
+    println!("value = {} ", value);
 }
