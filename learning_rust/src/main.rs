@@ -1,102 +1,136 @@
-fn main() {
-    /*
-    Structures
-        - Defining a structure
-        - Tuple Structure
-    */
+/*
+   Traits
+       - General Explanation
+       - Default Implementation
+*/
 
+use std::f32::consts::{PI, TAU};
+
+struct Person {
+    citizenship: String,
+    name: String,
+    age: u8,
+    gender: char,
+    salary: i32,
+}
+
+struct Student {
+    name_std: String,
+    age: u8,
+    sex: char,
+}
+
+trait General_info {
+    fn info(&self) -> (&str, u8, char);
+    fn country_info(&self) -> &str;
+}
+
+impl General_info for Person {
+    fn info(&self) -> (&str, u8, char) {
+        (&(self.name), self.age, self.gender)
+    }
+
+    fn country_info(&self) -> &str {
+        &self.name
+    }
+}
+
+impl General_info for Student {
+    fn info(&self) -> (&str, u8, char) {
+        (&(self.name_std), self.age, self.sex)
+    }
+
+    fn country_info(&self) -> &str {
+        &self.name_std
+    }
+}
+
+struct Circle {
+    radius: f32,
+}
+
+struct Rectangle {
+    length: f32,
+    width: f32,
+}
+
+struct Square {
+    width: f32,
+}
+
+trait General_Info {
+    fn area(&self) {
+        println!("Not Implemented");
+    }
+    fn perimeter(&self);
+}
+
+impl General_Info for Circle {
+    // fn area(&self) {
+    //     let area_of_circle = PI * (self.radius * self.radius);
+    //     println!("The Area of circle is {}", area_of_circle);
+    // }
+
+    fn perimeter(&self) {
+        let circumference = TAU * self.radius;
+        println!("The Circumference of circle is {}", circumference);
+    }
+}
+
+impl General_Info for Rectangle {
+    fn area(&self) {
+        let area_of_rectangle = self.width * self.length;
+        println!("The Area of rectangle is {}", area_of_rectangle);
+    }
+
+    fn perimeter(&self) {
+        let perimeter = (self.length * 2.0) + (self.width * 2.0);
+        println!("The Perimeter of rectangle is {}", perimeter);
+    }
+}
+
+impl General_Info for Square {
+    fn area(&self) {
+        let area_of_square = self.width * self.width;
+        println!("The Area of square is {}", area_of_square);
+    }
+
+    fn perimeter(&self) {
+        let perimeter = 2.0 * (self.width + self.width);
+        println!("The Perimeter of square is {}", perimeter);
+    }
+}
+
+fn main() {
     let person1 = Person {
-        name: String::from("Pasindu Akalpa"),
-        citizenship: String::from("Sri Lanka"),
+        name: String::from("Jhon Doe"),
+        citizenship: String::from("Unknown"),
         age: 40,
         gender: 'M',
         salary: 40_000,
     };
 
-    println!(
-        "The structure values are {}, {}, {}, {}, {}",
-        person1.name, person1.citizenship, person1.age, person1.gender, person1.salary
-    );
-    println!(
-        "The Taxes on person {} is {}",
-        person1.name,
-        Person::compute_taxes(&person1)
-    );
-
-    let person2 = Person::new();
-    println!("The Person 2 is initialzed with default values");
-    println!(
-        "{} , {} , {} , {} , {}",
-        person2.name, person2.citizenship, person2.age, person2.gender, person2.salary
-    );
-
-    let person3 = Person {
-        age: 50,
-        name: String::from("Example"),
-        ..person1
+    let stuent1 = Student {
+        name_std: String::from("Jane Doe"),
+        age: 15,
+        sex: 'F',
     };
 
-    println!(
-        "The name of the person 3 = {} and his salary is {}",
-        person3.name, person3.salary
-    );
+    println!("The basic info include {:?}", person1.info());
+    println!("The basic info for the student is {:?}", stuent1.info());
 
-    let mut person4 = Person::new();
-    println!("The default name of the person 4 is {}", person4.name);
-    person4.name = String::from("TEST");
-    println!("The update name of the person 4 is {}", person4.name);
+    let circle1 = Circle { radius: 12.0 };
+    circle1.area();
+    circle1.perimeter();
 
-    let some_nums = Numbers(32, 16);
+    let rectangle1 = Rectangle {
+        width: 12.0,
+        length: 24.0,
+    };
+    rectangle1.area();
+    rectangle1.perimeter();
 
-    println!(
-        "The values of the two fields are {}, {}",
-        some_nums.0, some_nums.1
-    );
-
-    println!("The greater value is {}", some_nums.greater());
-    println!("The lesser value is {}", some_nums.lesser());
-}
-
-struct Numbers(i32, i32);
-
-impl Numbers {
-    fn greater(&self) -> i32 {
-        if self.0 > self.1 {
-            self.0
-        } else {
-            self.1
-        }
-    }
-
-    fn lesser(&self) -> i32 {
-        if self.0 < self.1 {
-            self.0
-        } else {
-            self.1
-        }
-    }
-}
-
-struct Person {
-    citizenship: String,
-    name: String,
-    age: i32,
-    gender: char,
-    salary: i32,
-}
-
-impl Person {
-    fn new() -> Self {
-        Person {
-            citizenship: String::from("USA"),
-            name: String::from("abc"),
-            age: 40,
-            gender: 'M',
-            salary: 35_000,
-        }
-    }
-
-    fn compute_taxes(&self) -> f32 {
-        (self.salary as f32 / 3.) * 0.5
-    }
+    let square1 = Square { width: 10.0 };
+    square1.area();
+    square1.perimeter();
 }
