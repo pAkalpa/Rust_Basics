@@ -1,65 +1,37 @@
 /*
-   Option Enum
-   - Basic Syntax
+   Result Enum
+   - Basic syntax and usage
 */
 
-// enum Option<T> {
-//     None,
-//     Some(T),
+// enum Result<T, E> {
+//     Ok(T),
+//     Err(E),
 // }
 
-// fn main() {
-//     let mut disease: Option<String> = None;
-//     disease = Some(String::from("Diabetes"));
-
-//     match disease {
-//         Some(disease_name) => println!("You have the disease of {}", disease_name),
-//         None => println!("You do not have any disease"),
+// fn divition(divident: f64, divisor: f64) -> Result<f64, String> {
+//     //  if divisor == 0.0 {
+//     //      Err(String::from("Error: Division by zero"))
+//     //  } else {
+//     //      Ok(divident / divisor)
+//     //  }
+//     match divisor {
+//         0.0 => Err(String::from("Error: Divison by zero")),
+//         _ => Ok(divident / divisor),
 //     }
 // }
 
 // fn main() {
-//     let s1: Option<&str> = Some("Some String");
-//     println!(
-//         "The value of s1 is {:?}\n the value of s1 iteself is {:?}",
-//         s1,
-//         s1.unwrap()
-//     );
-
-//     let f1: Option<f64> = Some(10.54);
-//     let mut f2 = 16.5;
-
-//     f2 = f2 + f1.unwrap();
-
-//     println!("The value of f2 is {}", f2);
-
-//     let v1: Option<Vec<i32>> = Some(vec![0, 1, 2, 3]);
-//     let p1 = Person {
-//         name: String::from("Pasindu"),
-//         age: 25,
-//     };
-
-//     let some_one: Option<Person> = Some(p1);
+//     println!("{:?}", divition(9.0, 3.0));
+//     println!("{:?}", divition(4.0, 0.0));
+//     println!("{:?}", divition(0.0, 2.0));
 // }
-
-// struct Person {
-//     name: String,
-//     age: i32,
-// }
-
-fn square(num: Option<i32>) -> Option<i32> {
-    match num {
-        Some(number) => Some(number * number),
-        None => None,
-    }
-}
 
 fn main() {
-    let number = Some(6);
+    let some_vec = vec![5, 5, 2, 1, 5, 9];
+    let result = match some_vec.get(6) {
+        Some(a) => Ok(a),
+        None => Err("The value does not exist"),
+    };
 
-    if square(number) != None {
-        println!("The Value of number is {:?}", square(number));
-    } else {
-        println!("We do not have any value");
-    }
+    println!("The value of result is {:?}", result);
 }
