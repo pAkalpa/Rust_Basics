@@ -1,63 +1,65 @@
 /*
-   Generics
-   - Motivation (reducing code duplication)
-   - Generics in functions
-   - Generics in structs
+   Option Enum
+   - Basic Syntax
 */
 
-// fn squarei32(x: i32) -> i32 {
-//     x * x
-// }
-
-// fn squaref32(x: f32) -> f32 {
-//     x * x
+// enum Option<T> {
+//     None,
+//     Some(T),
 // }
 
 // fn main() {
-//     println!("The square of the number is {}", squarei32(5));
-//     println!("The square of the number is {}", squaref32(5.5));
-// }
+//     let mut disease: Option<String> = None;
+//     disease = Some(String::from("Diabetes"));
 
-// fn square<T>(x: T) -> T
-// where
-//     T: std::ops::Mul<Output = T> + Copy,
-// {
-//     x * x
-// }
-
-// fn add<T: std::ops::Add<Output = T> + Copy>(x: T) -> T {
-//     x + x
+//     match disease {
+//         Some(disease_name) => println!("You have the disease of {}", disease_name),
+//         None => println!("You do not have any disease"),
+//     }
 // }
 
 // fn main() {
-//     println!("The square of the number is {}", square(5));
-//     println!("The square of the number is {}", square(5.5));
-//     println!("The add of the number is {}", add(5.5));
+//     let s1: Option<&str> = Some("Some String");
+//     println!(
+//         "The value of s1 is {:?}\n the value of s1 iteself is {:?}",
+//         s1,
+//         s1.unwrap()
+//     );
+
+//     let f1: Option<f64> = Some(10.54);
+//     let mut f2 = 16.5;
+
+//     f2 = f2 + f1.unwrap();
+
+//     println!("The value of f2 is {}", f2);
+
+//     let v1: Option<Vec<i32>> = Some(vec![0, 1, 2, 3]);
+//     let p1 = Person {
+//         name: String::from("Pasindu"),
+//         age: 25,
+//     };
+
+//     let some_one: Option<Person> = Some(p1);
 // }
 
-struct Point<T, U> {
-    x: T,
-    y: U,
-}
+// struct Person {
+//     name: String,
+//     age: i32,
+// }
 
-impl<T, U> Point<T, U>
-where
-    T: std::fmt::Debug,
-    U: std::fmt::Debug,
-{
-    fn printing(&self) {
-        println!("The value of the points are {:?}, {:?}", self.x, self.y);
+fn square(num: Option<i32>) -> Option<i32> {
+    match num {
+        Some(number) => Some(number * number),
+        None => None,
     }
 }
 
 fn main() {
-    let p1 = Point { x: 5, y: 5 };
+    let number = Some(6);
 
-    let p2 = Point { x: 1.0, y: 4.0 };
-
-    let p3 = Point { x: 5, y: 5.0 };
-
-    p1.printing();
-    p2.printing();
-    p3.printing();
+    if square(number) != None {
+        println!("The Value of number is {:?}", square(number));
+    } else {
+        println!("We do not have any value");
+    }
 }
