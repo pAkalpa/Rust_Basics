@@ -1,40 +1,65 @@
 /*
-    Traits
-        - Functions within a trait implementation
+    Enums
+        - General Syntax
+        - Enums with attached data
+        - Enums to create vector with different types pf data
 */
 
-struct Data {
-    some_data: Vec<i32>,
-}
+// enum Conveyance {
+//     Car(i32),
+//     Train(i32),
+//     Air(i32),
+// }
 
-trait BasicStats {
-    fn mean(&self) -> f32;
-    fn variance(&self) -> f32;
-}
+// impl Conveyance {
+//     fn travel_allowance(&self) -> f32 {
+//         let allowance = match self {
+//             Conveyance::Car(miles) => *miles as f32 * 14.0 * 2.0,
+//             Conveyance::Train(miles) => *miles as f32 * 18.0 * 2.0,
+//             Conveyance::Air(miles) => *miles as f32 * 30.0 * 2.0,
+//         };
+//         allowance
+//     }
+// }
 
-impl BasicStats for Data {
-    fn mean(&self) -> f32 {
-        let mut sum = 0;
-        for i in self.some_data.iter() {
-            sum += *i;
-        }
-        sum as f32 / self.some_data.len() as f32
-    }
+// fn main() {
+//     let participant_1 = Conveyance::Car(60);
+//     // println!("The value of the option is {}", participant_1 as i32);
 
-    fn variance(&self) -> f32 {
-        let mu = self.mean();
-        let mut sum_squared_diff: f32 = 0.0;
-        for i in self.some_data.iter() {
-            sum_squared_diff += (*i as f32 - mu) * (*i as f32 - mu);
-        }
-        sum_squared_diff / self.some_data.len() as f32
-    }
+//     let participant_2 = Conveyance::Air(120);
+//     let participant_3 = Conveyance::Train(60);
+
+//     println!(
+//         "The participant 1 has a travel allowance of {}",
+//         participant_1.travel_allowance()
+//     );
+//     println!(
+//         "The participant 2 has a travel allowance of {}",
+//         participant_2.travel_allowance()
+//     );
+//     println!(
+//         "The participant 3 has a travel allowance of {}",
+//         participant_3.travel_allowance()
+//     );
+// }
+
+#[derive(Debug)]
+enum Value {
+    Integer(i32),
+    Float(f32),
 }
 
 fn main() {
-    let my_data = Data {
-        some_data: vec![5, 6, 9, 8, 7, 4, 8],
-    };
-    println!("The mean of the data is {}", my_data.mean());
-    println!("The variance of the data is {}", my_data.variance());
+    let some_value = vec![Value::Integer(12), Value::Float(15.5)];
+    println!(
+        "The value of the integer is {:?} and the value of the float is {:?}",
+        some_value[0], some_value[1]
+    );
+
+    for i in some_value.iter() {
+        match i {
+            Value::Integer(num) => println!("The value is an integer with a value of {}", num),
+            Value::Float(num) => println!("The value is a float with a value of {}", num),
+        }
+    }
 }
