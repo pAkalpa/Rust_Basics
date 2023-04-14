@@ -1,59 +1,106 @@
 /*
-   Hash Maps
-   - Defining Hashmap
-   - Inserting Values
-   - Accessing Values
-   - Checking if the value exist
-   - Iterating through elements of hashmap
-   - Updating a value at a specific key
+    Lifetimes
+    - Dangling Reference
+    - Undetermined Lifetime
+    - Generic Lifetime Parameters
+    - GLP typical needed with outputs from functions that are references
+    - Issue with GLP
+    - GLP with multiple variables
+    - GLP and structures
+    - Reference to the same variable
 */
-
-use std::collections::HashMap;
+// fn main() {
+//     let i: &i32;
+//     {
+//         let j = 5;
+//         i = &j;
+//     }
+//     println!("{}", i)
+// }
 
 // fn main() {
-//     let mut person: HashMap<&str, i32> = HashMap::new();
-//     person.insert("Pasindu", 25);
-//     person.insert("Jhon", 40);
-//     person.insert("Jane", 30);
+//     let some_int = 10;
+//     let additional_int = some_fn(&some_int);
+//     println!("{}", additional_int);
+// }
 
-//     println!("The age is {:?}", person.get("Jhon").unwrap());
+// fn some_fn(i: &i32) -> &i32 {
+//     &i
+// }
 
-//     if person.contains_key("Pasindu") {
-//         println!("The value exist");
+// fn main() {
+//     let int1 = 5;
+//     let int2 = 10;
+//     let result = greater(&int1, int2);
+// }
+
+// fn greater<'a>(i: &'a i32, j: i32) -> &'a i32 {
+//     i
+// }
+
+// fn main() {
+//     let int1 = 11;
+//     {
+//         let int2 = 10;
+//         let result = greater(&int1, &int2);
+//         println!("The larger value is {}", result);
+//     }
+// }
+
+// fn greater<'a>(i: &'a i32, j: &'a i32) -> &'a i32 {
+//     if i > j {
+//         i
 //     } else {
-//         println!("The value does not exist");
-//     }
-
-//     match person.get("Pasindu") {
-//         Some(Value) => println!("The value exists {}", Value),
-//         None => println!("The value does not exists"),
-//     }
-
-//     for (name, age) in &person {
-//         println!("The person {} has an age of {}", name, age);
+//         j
 //     }
 // }
 
 // fn main() {
-//     let mut likes: HashMap<&str, &str> = HashMap::new();
-//     //  likes.insert("Pasindu", "games");
-//     //  likes.insert("Pasindu", "apple");
+//     let s_1 = "Hello";
+//     let v;
+//     {
+//         let s_2 = String::from("World");
+//         v = some_fn(s_1, s_2.as_str());
+//     }
+//     println!("{}", v);
+// }
 
-//     //  println!("The things which is being liked is {:?}", likes)
-//     likes.entry("Pasindu").or_insert("apple");
-//     likes.entry("Pasindu").or_insert("asus");
+// fn some_fn<'a, 'b>(first_str: &'a str, second_str: &'b str) -> &'b str {
+//     second_str
+// }
 
-//     println!("The things which is being liked is {:?}", likes)
+// struct Person<'a> {
+//     name: &'a str,
+//     age: i32,
+// }
+
+// fn main() {
+//     let first_name = "Pasindu";
+//     let mut pasindu = Person {
+//         name: &first_name,
+//         age: 25,
+//     };
+
+//     {
+//         let last_name = String::from("Akalpa");
+//         pasindu.name = &last_name;
+//     }
+
+//     // println!(
+//     //     "The name of the person is {} and his age is {}",
+//     //     pasindu.name, pasindu.age
+//     // );
 // }
 
 fn main() {
-    let some_vec: Vec<i32> = vec![5, 5, 8, 8, 1, 0, 1, 5, 5, 5, 5];
-    let mut freq_vec: HashMap<i32, u32> = HashMap::new();
+    let some_vec = vec![5, 8, 9, 8, 7, 5, 2];
+    let return_vec = use_vec(&some_vec, &some_vec);
+}
 
-    for i in &some_vec {
-        let freq: &mut u32 = freq_vec.entry(*i).or_insert(0);
-        *freq += 1;
+fn use_vec<'a>(vec1: &'a [i32], vec2: &'a [i32]) -> &'a [i32] {
+    if 3 > 5 {
+        vec1
+    } else {
+        vec2
     }
-
-    println!("{:?}", freq_vec);
 }
