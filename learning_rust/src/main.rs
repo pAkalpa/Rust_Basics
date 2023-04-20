@@ -1,106 +1,77 @@
 /*
-    Lifetimes
-    - Dangling Reference
-    - Undetermined Lifetime
-    - Generic Lifetime Parameters
-    - GLP typical needed with outputs from functions that are references
-    - Issue with GLP
-    - GLP with multiple variables
-    - GLP and structures
-    - Reference to the same variable
+    Closures
+    - Basic Syntax
+    - Closure with inputs
+    - Same variable for different closure
+    - Ownership rules and closures
+    - Inference of the output
+    - Passing a closure as a function argument
+    - Borrow by immutable reference
+    - Moving of a value into a closure
 */
-// fn main() {
-//     let i: &i32;
-//     {
-//         let j = 5;
-//         i = &j;
-//     }
-//     println!("{}", i)
-// }
+
+// |...| {...}
 
 // fn main() {
-//     let some_int = 10;
-//     let additional_int = some_fn(&some_int);
-//     println!("{}", additional_int);
-// }
+//     let x = 5;
+//     let square = |num: i32| println!("The square of {} is {}", num, num * num);
+//     let square = |num: i32| println!("The cube of {} is {}", num, num * num * num);
+//     square(x);
 
-// fn some_fn(i: &i32) -> &i32 {
-//     &i
+//     let y = 15;
+//     square(y);
 // }
 
 // fn main() {
-//     let int1 = 5;
-//     let int2 = 10;
-//     let result = greater(&int1, int2);
-// }
-
-// fn greater<'a>(i: &'a i32, j: i32) -> &'a i32 {
-//     i
-// }
-
-// fn main() {
-//     let int1 = 11;
-//     {
-//         let int2 = 10;
-//         let result = greater(&int1, &int2);
-//         println!("The larger value is {}", result);
-//     }
-// }
-
-// fn greater<'a>(i: &'a i32, j: &'a i32) -> &'a i32 {
-//     if i > j {
-//         i
-//     } else {
-//         j
-//     }
-// }
-
-// fn main() {
-//     let s_1 = "Hello";
-//     let v;
-//     {
-//         let s_2 = String::from("World");
-//         v = some_fn(s_1, s_2.as_str());
-//     }
-//     println!("{}", v);
-// }
-
-// fn some_fn<'a, 'b>(first_str: &'a str, second_str: &'b str) -> &'b str {
-//     second_str
-// }
-
-// struct Person<'a> {
-//     name: &'a str,
-//     age: i32,
-// }
-
-// fn main() {
-//     let first_name = "Pasindu";
-//     let mut pasindu = Person {
-//         name: &first_name,
-//         age: 25,
+//     let print_user_age = |general_info: String, name: &str, age: i32| {
+//         println!("{} \n\t {} \n\t {}", general_info, name, age)
 //     };
 
-//     {
-//         let last_name = String::from("Akalpa");
-//         pasindu.name = &last_name;
-//     }
+//     let general_info = String::from("The details are");
+//     let (person_name, person_age) = (String::from("Pasindu"), 51);
 
-//     // println!(
-//     //     "The name of the person is {} and his age is {}",
-//     //     pasindu.name, pasindu.age
-//     // );
+//     print_user_age(general_info, &person_name, person_age);
+//     println!("The variable has been moved {}", person_name);
+// }
+
+// fn main() {
+//     let square = |num| num * num;
+//     // let x = 5;
+//     // square(x);
+
+//     let y = 5.5;
+//     square(y);
+// }
+
+// fn main() {
+//     let division_status = |y: f32| {
+//         if y != 0.0 {
+//             true
+//         } else {
+//             false
+//         }
+//     };
+//     division(5.0, 10.0, division_status);
+//     division(55.0, 0.0, division_status);
+// }
+
+// fn division<F: Fn(f32) -> bool>(x: f32, y: f32, f: F) {
+//     if f(y) {
+//         println!("The division result is {}", x / y);
+//     } else {
+//         println!("Division is not possible");
+//     }
 // }
 
 fn main() {
-    let some_vec = vec![5, 8, 9, 8, 7, 5, 2];
-    let return_vec = use_vec(&some_vec, &some_vec);
-}
+    let mut vec_1 = vec![1, 2, 3];
+    let mut some_closure = || {
+        let vec_2 = vec_1;
+    };
 
-fn use_vec<'a>(vec1: &'a [i32], vec2: &'a [i32]) -> &'a [i32] {
-    if 3 > 5 {
-        vec1
-    } else {
-        vec2
-    }
+    // println!("vec 1 {:?}", vec_1);
+
+    some_closure();
+    // println!("vec 1 = {:?}", vec_1);
+    // println!("vec 2 = {:?}", vec_2);
 }
