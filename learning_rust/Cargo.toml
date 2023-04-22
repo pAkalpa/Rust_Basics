@@ -1,9 +1,11 @@
 [package]
-name = "learning_rust"
+name = "learning_rust_pa"
 version = "0.1.0"
 edition = "2021"
+authors = ["Pasindu"]
+description = "Basic math operations"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-array_tool = "1.0.3"
